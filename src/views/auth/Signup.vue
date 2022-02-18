@@ -1,11 +1,11 @@
 <template>
   <form @submit.prevent="handleSubmit">
-    <h3>Sign up</h3>
+    <h3>Signup</h3>
     <input type="text" placeholder="Display name" v-model="displayName" />
     <input type="email" placeholder="Email" v-model="email" />
     <input type="password" placeholder="Password" v-model="password" />
     <div v-if="error" class="error">{{ error }}</div>
-    <button :disabled="isPending" >Sign up</button>
+    <button :disabled="isPending" >Signup</button>
   </form>
 </template>
 

@@ -6,9 +6,11 @@
         <h1>Playlist-maker</h1>
       </router-link>
       <div class="links">
-        <button @click="handleSubmit">Logout</button>
-        <router-link class="btn" :to="{ name: 'Signup' }">Signup</router-link>
-        <router-link class="btn" :to="{ name: 'Login' }">login</router-link>
+        <button @click="handleSubmit" v-if="user">Logout</button>
+        <div v-else>
+          <router-link class="btn" :to="{ name: 'Signup' }">Signup</router-link>
+          <router-link class="btn" :to="{ name: 'Login' }">login</router-link>
+        </div>
       </div>
     </nav>
   </div>
@@ -17,10 +19,12 @@
 <script>
 import { useRouter } from 'vue-router'
 import useLogout from '../composables/useLogout'
+import getUser from '../composables/getUser'
 
 export default {
   setup() {
     const { error, logout, isPending } = useLogout()
+    const { user } = getUser()
     const router = useRouter()
 
     async function handleSubmit() {
@@ -31,7 +35,7 @@ export default {
       }
     }
 
-    return { handleSubmit }
+    return { handleSubmit, user }
   }
 }
 </script>

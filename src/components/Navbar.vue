@@ -26,7 +26,7 @@ export default {}
 nav {
   display: flex;
   align-items: center;
-  max-width: 1200px;
+  max-width: 95vw;
   margin: 0 auto;
 }
 

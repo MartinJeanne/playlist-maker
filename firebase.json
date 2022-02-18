@@ -4,6 +4,7 @@
     "indexes": "firestore.indexes.json"
   },
   "hosting": {
+    "site": "playlist-maker",
     "public": "dist",
     "ignore": [
       "firebase.json",

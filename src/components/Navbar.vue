@@ -1,19 +1,39 @@
 <template>
   <div class="navbar">
     <nav>
-        <img src="@/assets/playlist.png">
-      <h1><router-link :to="{ name: 'Home' }">Playlist-maker</router-link></h1>
+      <router-link id="home" :to="{ name: 'Home' }">
+        <img src="@/assets/playlist.png" />
+        <h1>Playlist-maker</h1>
+      </router-link>
       <div class="links">
-        <button>Logout</button>
+        <button @click="handleSubmit">Logout</button>
         <router-link class="btn" :to="{ name: 'Signup' }">Signup</router-link>
-         <router-link class="btn" :to="{ name: 'Login' }">login</router-link>
+        <router-link class="btn" :to="{ name: 'Login' }">login</router-link>
       </div>
     </nav>
   </div>
 </template>
 
 <script>
-export default {}
+import { useRouter } from 'vue-router'
+import useLogout from '../composables/useLogout'
+
+export default {
+  setup() {
+    const { error, logout, isPending } = useLogout()
+    const router = useRouter()
+
+    async function handleSubmit() {
+      const res = await logout()
+      if (!error.value) {
+        console.log('logout')
+        router.push({ name: 'Login' })
+      }
+    }
+
+    return { handleSubmit }
+  }
+}
 </script>
 
 <style>
@@ -30,6 +50,11 @@ nav {
   margin: 0 auto;
 }
 
+nav > #home {
+  display: flex;
+  align-items: center;
+}
+
 nav h1 {
   margin-left: 20px;
 }
@@ -38,12 +63,13 @@ nav .links {
   margin-left: auto;
 }
 
-nav .links a, button {
+nav .links a,
+button {
   margin-left: 16px;
   font-size: 14px;
 }
 
 nav img {
-    max-height: 60px;
+  max-height: 60px;
 }
 </style>
